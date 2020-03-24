@@ -1,10 +1,11 @@
+const faker = require('faker')
 const database = require('../../infrastructure/database')
 const Deployment = require('../../../src/metrics/deploymentFrequency/model/deployment')
 const DeploymentFilter = require('../../../src/metrics/deploymentFrequency/filter')
 
 describe('Deployment Frequency Filter', () => {
-    let TENANT = "tenant"
-    let ID = "some-random-id"
+    let TENANT = faker.name.firstName()
+    let ID = faker.random.uuid()
     let WHEN_HAPPENED = +(new Date())
 
     let db;
@@ -18,7 +19,8 @@ describe('Deployment Frequency Filter', () => {
         return DeploymentFilter(db)
     }
 
-    const otherRandomDeployment = () => new Deployment(TENANT + Math.random(), ID + Math.random(), +(new Date()))
+    const otherRandomDeployment = () => 
+        new Deployment(faker.name.firstName(), faker.random.uuid(), +(new Date()))
 
     beforeEach(async () => {
         db = await database.setupDatabase()
