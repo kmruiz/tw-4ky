@@ -2,9 +2,9 @@ const directory = require('./directory')
 const emitter = require('./emitter')
 const filter = require('./filter')
 
-module.exports = (db, exporter) => {
+module.exports = (db, sink) => {
     const _directory = directory(db)
-    const _emitter = emitter(exporter)
+    const _emitter = emitter(sink)
     const _filter = filter(db)
 
     return async deployment => {

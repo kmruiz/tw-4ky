@@ -6,7 +6,7 @@ class StatsDSink {
     }
 
     deploymentHappened(tenant, deployable) {
-        this.client.gauge('4km.deployment', 1, 1, [ tenant, deployable ])
+        this.client.increment('fkm_deployment', 1, 1, [ tenant, deployable ])
     }
 }
 

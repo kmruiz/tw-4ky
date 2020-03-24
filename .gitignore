@@ -1,4 +1,5 @@
 node_modules
 .dev/*
 !.dev/.gitkeep
+!.dev/prometheus.yml
 .vscode

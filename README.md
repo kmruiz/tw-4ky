@@ -24,18 +24,10 @@ The development environment is quite complex, as it requires:
 
 * A Jenkins
 * A SQL database
-* A Graphite (or other statsd server)
+* A Prometheus (and the statsd-exporter)
 * A Grafana (or other visualizer)
 
 However, those steps are thought to prepare the environment with a premade docker-compose.
-
-### Prepare the .dev folder
-
-This will contain all the information of your development environment and it's ignored on git.
-
-```sh
-$> mkdir .dev
-```
 
 ### Create a local SQLite database
 
@@ -51,7 +43,17 @@ And then run the migration script:
 $> npm run migration:apply
 ```
 
-### Start the external dependencies (Jenkins, Graphite and Grafana)
+---
+**Note**
+You can restart the database doing a rollback of the migrations and starting it again:
+```sh
+$> npm run migration:rollback
+$> npm run migration:apply
+```
+
+---
+
+### Start the external dependencies (Jenkins, Prometheus and Grafana)
 
 All the dependencies are in the docker-compose.yml file, living in the root folder of the project. To instantiate them, just start the docker-compose:
 
@@ -67,15 +69,15 @@ Grafana will be listening to the port 8082 in your machine, so navigate to:
 
 This will ask you for a login, in Grafana, the default login is `admin/admin`. Grafana will be asking after the first login for new credentials: put whatever is comfortable for you. It's a dockerized development environment after all and it doesn't contain critical information.
 
-After logging in, go to `Add Data Source`, choose `Graphite`, and fill the information as this:
+After logging in, go to `Add Data Source`, choose `Prometheus`, and fill the information as this:
 
 | Field | Value |
 |-------|-------|
-|URL|http://graphite.service|
+|URL|http://prometheus.service:9090|
 
 And that's it.
 
-Press `Save & Test` and everything should be working. Now you can create dashboards in Grafana using the information from Graphite.
+Press `Save & Test` and everything should be working. Now you can create dashboards in Grafana using the information from Prometheus.
 
 ### Configuring Jenkins
 
