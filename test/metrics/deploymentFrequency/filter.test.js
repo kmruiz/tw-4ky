@@ -4,23 +4,24 @@ const Deployment = require('../../../src/metrics/deploymentFrequency/model/deplo
 const DeploymentFilter = require('../../../src/metrics/deploymentFrequency/filter')
 
 describe('Deployment Frequency Filter', () => {
-    let TENANT = faker.name.firstName()
-    let ID = faker.random.uuid()
-    let WHEN_HAPPENED = +(new Date())
+    const TENANT = faker.name.firstName()
+    const DEPLOYABLE = faker.random.uuid()
+    const ID = faker.random.uuid()
+    const WHEN_HAPPENED = +(new Date())
 
     let db;
 
-    const deploymentFrom = (tenant, id, happened) => new Deployment(tenant, id, happened)
+    const deploymentFrom = (tenant, deployable, id, happened) => new Deployment(tenant, deployable, id, happened)
     const deploymentFilter = async ({ given }) => {
-        await Promise.all(given.map(async ({ tenant, externalId, happened }) => {
-            await db("4km_df_deployments").insert({ tenant, external_id: externalId, happened })
+        await Promise.all(given.map(async ({ tenant, deployable, externalId, happened }) => {
+            await db("4km_df_deployments").insert({ tenant, deployable, external_id: externalId, happened })
         }))
 
         return DeploymentFilter(db)
     }
 
     const otherRandomDeployment = () => 
-        new Deployment(faker.name.firstName(), faker.random.uuid(), +(new Date()))
+        new Deployment(faker.name.firstName(), faker.random.uuid(), faker.random.uuid(), +(new Date()))
 
     beforeEach(async () => {
         db = await database.setupDatabase()
@@ -40,7 +41,7 @@ describe('Deployment Frequency Filter', () => {
 
 
     it('should discard any deployments that have been already processed', async () => {
-        const currentDeployment = deploymentFrom(TENANT, ID, WHEN_HAPPENED)
+        const currentDeployment = deploymentFrom(TENANT, DEPLOYABLE, ID, WHEN_HAPPENED)
         const filter = await deploymentFilter({ given: [ currentDeployment ] })
 
         const shouldBeProcessed = await filter(currentDeployment)

@@ -109,7 +109,7 @@ The base64 will look like:
 
 `YWRtaW46cGFzc3dvcmQ=`
 
-----
+---
 
 **Note**
 

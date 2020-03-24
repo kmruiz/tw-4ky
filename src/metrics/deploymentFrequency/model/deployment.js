@@ -1,6 +1,7 @@
 module.exports = class {
-    constructor(tenant, externalId, happened) {
+    constructor(tenant, deployable, externalId, happened) {
         this.tenant = tenant
+        this.deployable = deployable
         this.externalId = externalId
         this.happened = happened
     }
