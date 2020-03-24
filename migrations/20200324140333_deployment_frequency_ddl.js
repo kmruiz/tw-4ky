@@ -1,6 +1,6 @@
 
 exports.up = async function(knex) {
-    await knex.schema.createTable('4km_df_deployments', function (table) {
+    await knex.schema.createTable('fkm_df_deployments', function (table) {
         table.string('tenant')
         table.string('deployable')
         table.string('external_id')
@@ -11,5 +11,5 @@ exports.up = async function(knex) {
 };
 
 exports.down = async function(knex) {
-    await knex.schema.dropTable('4km_df_deployments');
+    await knex.schema.dropTable('fkm_df_deployments');
 };

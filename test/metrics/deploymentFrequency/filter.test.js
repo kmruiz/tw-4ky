@@ -14,7 +14,7 @@ describe('Deployment Frequency Filter', () => {
     const deploymentFrom = (tenant, deployable, id, happened) => new Deployment(tenant, deployable, id, happened)
     const deploymentFilter = async ({ given }) => {
         await Promise.all(given.map(async ({ tenant, deployable, externalId, happened }) => {
-            await db("4km_df_deployments").insert({ tenant, deployable, external_id: externalId, happened })
+            await db("fkm_df_deployments").insert({ tenant, deployable, external_id: externalId, happened })
         }))
 
         return DeploymentFilter(db)

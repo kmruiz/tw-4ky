@@ -14,7 +14,7 @@ describe('Deployment Frequency Directory', () => {
     const deploymentFrom = (tenant, deployable, id, happened) => new Deployment(tenant, deployable, id, happened)
     const directory = async () => DeploymentDirectory(db)
 
-    const toExist = async (deployment) => (await db("4km_df_deployments").count('*', { as: 'count' }).where({
+    const toExist = async (deployment) => (await db("fkm_df_deployments").count('*', { as: 'count' }).where({
         tenant: deployment.tenant,
         deployable: deployment.deployable,
         external_id: deployment.externalId,

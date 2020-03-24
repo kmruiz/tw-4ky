@@ -4,6 +4,7 @@ module.exports = {
     connection: {
       filename: './.dev/database.sqlite3'
     },
+    wrapIdentifier: (value) => value,
     useNullAsDefault: true
   },
 
@@ -14,6 +15,7 @@ module.exports = {
       min: 2,
       max: 10
     },
+    wrapIdentifier: (value) => value,
     migrations: {
       tableName: 'MIGRATIONS'
     }
