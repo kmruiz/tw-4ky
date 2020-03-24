@@ -32,7 +32,7 @@ describe('Jenkins Source', () => {
     beforeEach(() => {
         server.get('/api/json?tree=jobs[name]{0,50}')
             .reply(200, {
-                jobs: [{ name: 'test-pipeline' }]
+                jobs: [{ name: 'test-pipeline' }, { name: faker.random.uuid() }]
             })
 
         server.get('/job/test-pipeline/api/json?tree=builds[number,timestamp,result]{0,50}')

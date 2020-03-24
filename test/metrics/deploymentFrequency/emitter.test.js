@@ -6,15 +6,15 @@ describe('Deployment Frequency Emitter', () => {
     const TENANT = faker.random.uuid()
     const DEPLOYABLE = faker.random.uuid()
 
-    const exporter = {
+    const sink = {
         deploymentHappened: jest.fn()
     }
 
     const deploymentFrom = (tenant, deployable, id, happened) => new Deployment(tenant, deployable, id, happened)
-    const emitter = () => DeploymentEmitter(exporter)
+    const emitter = () => DeploymentEmitter(sink)
 
     beforeEach(() => {
-        exporter.deploymentHappened.mockReset()
+        sink.deploymentHappened.mockReset()
     })
 
     it('should emit the deployment information to the specified exporter', () => {
@@ -22,6 +22,6 @@ describe('Deployment Frequency Emitter', () => {
         const currentEmitter = emitter()
         currentEmitter(deployment)
 
-        expect(exporter.deploymentHappened).toHaveBeenCalledWith(TENANT, DEPLOYABLE)
+        expect(sink.deploymentHappened).toHaveBeenCalledWith(TENANT, DEPLOYABLE)
     })
 })
