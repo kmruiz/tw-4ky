@@ -39,7 +39,12 @@ describe('Jenkins Source', () => {
             .reply(200, {
                 builds: [{
                     number: EXTERNAL_ID,
-                    timestamp: HAPPENED
+                    timestamp: HAPPENED,
+                    result: "SUCCESS" 
+                },{
+                    number: EXTERNAL_ID,
+                    timestamp: HAPPENED,
+                    result: "FAILED" 
                 }]
             })
     })

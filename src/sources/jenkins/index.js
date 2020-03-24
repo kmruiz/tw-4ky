@@ -43,7 +43,9 @@ class Jenkins {
 
         const allBuilds = await Promise.all(jobsData.map(async jobData => {
             const jobBuilds = await queryBuilds(this.config.connection, jobData.name)
-            return jobBuilds.map(build => new Deployment(jobData.tenant, jobData.deployable, build.number, build.timestamp ))
+            return jobBuilds
+                .filter(jobData => jobData.result === 'SUCCESS')
+                .map(build => new Deployment(jobData.tenant, jobData.deployable, build.number, build.timestamp ))
         }))
 
         return allBuilds.flat()
