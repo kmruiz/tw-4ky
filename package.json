@@ -4,8 +4,8 @@
   "description": "4 key metrics analyzer and exporter",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watchAll",
+    "test": "jest test/",
+    "test:watch": "jest --watchAll test/",
     "migration:new": "knex migrate:make",
     "migration:apply": "knex migrate:latest",
     "migration:rollback": "knex migrate:rollback"

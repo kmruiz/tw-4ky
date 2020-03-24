@@ -1,0 +1,18 @@
+GET http://localhost:8080/job/test-pipeline/api/json?tree=builds[number,timestamp,result,duration,url]{0,50}
+Accept: application/json
+Authorization: Basic YWRtaW46OWM2MzFkMDZiMTRlNDE1MGFjYjFlOTI5NDk4NWNiZTA=
+
+# Example Response
+# {
+#   "_class": "hudson.model.FreeStyleProject",
+#   "builds": [
+#     {
+#       "_class": "hudson.model.FreeStyleBuild",
+#       "duration": 11641,
+#       "number": 1,
+#       "result": "SUCCESS",
+#       "timestamp": 1585058208656,
+#       "url": "http://localhost:8080/job/test-pipeline/1/"
+#     }
+#   ]
+# }
