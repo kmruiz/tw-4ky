@@ -4,7 +4,11 @@
   "description": "4 key metrics analyzer and exporter",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "migration:new": "knex migrate:make",
+    "migration:apply": "knex migrate:latest",
+    "migration:rollback": "knex migrate:rollback"
   },
   "keywords": [
     "4",
@@ -17,13 +21,16 @@
   "author": "Kevin Mas Ruiz <kmas@thoughtworks.com>",
   "license": "ISC",
   "dependencies": {
+    "knex": "^0.20.13",
     "node-cron": "^2.0.3",
+    "pg": "^7.18.2",
     "request": "^2.88.2",
     "statsd-client": "^0.4.4",
     "yaml": "^1.8.3"
   },
   "devDependencies": {
     "jest": "^25.1.0",
-    "nock": "^12.0.3"
+    "nock": "^12.0.3",
+    "sqlite3": "^4.1.1"
   }
 }
