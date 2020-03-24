@@ -1,0 +1,29 @@
+{
+  "name": "4ky",
+  "version": "0.0.1",
+  "description": "4 key metrics analyzer and exporter",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "4",
+    "key",
+    "metrics",
+    "devops",
+    "accelerate",
+    "jenkins"
+  ],
+  "author": "Kevin Mas Ruiz <kmas@thoughtworks.com>",
+  "license": "ISC",
+  "dependencies": {
+    "node-cron": "^2.0.3",
+    "request": "^2.88.2",
+    "statsd-client": "^0.4.4",
+    "yaml": "^1.8.3"
+  },
+  "devDependencies": {
+    "jest": "^25.1.0",
+    "nock": "^12.0.3"
+  }
+}
