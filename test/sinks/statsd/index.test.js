@@ -6,11 +6,11 @@ describe('StatsD Sink', () => {
     const DEPLOYABLE = faker.random.uuid()
 
     const client = {
-        increment: jest.fn()
+        gauge: jest.fn()
     }
 
     beforeEach(() => {
-        client.increment.mockReset()
+        client.gauge.mockReset()
     })
 
     const sink = () => StatsDSink({ client })
@@ -19,6 +19,6 @@ describe('StatsD Sink', () => {
         const currentSink = sink()
         currentSink.deploymentHappened(TENANT, DEPLOYABLE)
 
-        expect(client.increment).toHaveBeenCalledWith('fkm_deployment', 1, 1, [ TENANT, DEPLOYABLE ])
+        expect(client.gauge).toHaveBeenCalledWith('fkm_deployment_gauge', 1, 1, [ TENANT, DEPLOYABLE ])
     })
 })
