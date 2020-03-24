@@ -5,7 +5,7 @@ exports.up = async function(knex) {
         table.string('external_id');
         table.datetime('happened').notNullable();
 
-        table.unique([ 'tenant', 'external_id' ]);
+        table.primary([ 'tenant', 'external_id' ]);
     });
 };
 
