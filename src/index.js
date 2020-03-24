@@ -21,9 +21,4 @@ const source = JenkinsSource({
 
 const sink = StatsDSink({})
 
-const deploymentFrequency = require('./metrics/deploymentFrequency')(database, sink)
-
-;(async function () {
-    const deployments = await source.deployments()
-    deployments.forEach(deploymentFrequency)
-})()
+require('./metrics/deploymentFrequency')(source, database, sink)

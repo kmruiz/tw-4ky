@@ -2,7 +2,7 @@ const directory = require('./directory')
 const emitter = require('./emitter')
 const filter = require('./filter')
 
-module.exports = (db, sink) => {
+const applyMetric = (db, sink) => {
     const _directory = directory(db)
     const _emitter = emitter(sink)
     const _filter = filter(db)
@@ -16,4 +16,15 @@ module.exports = (db, sink) => {
         _directory(deployment)
         _emitter(deployment)
     }
+}
+
+const cron = require('node-cron')
+
+module.exports = (source, db, sink) => {
+    const deploymentFrequency = applyMetric(db, sink)
+
+    cron.schedule('* * * * *', async () => {
+        const deployments = await source.deployments()
+        deployments.forEach(deploymentFrequency)
+    });
 }
