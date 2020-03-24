@@ -6,4 +6,16 @@ services:
             - "8080:8080"
         volumes: 
             - ".dev/jenkins_home:/var/jenkins_home"
-        
+    
+    grafana:
+        image: grafana/grafana
+        ports:
+            - "8082:3000"
+        links: 
+            - "graphite:graphite.service"
+    
+    graphite:
+        image: graphiteapp/graphite-statsd
+        ports:
+            - "8081:80"
+            - "8125:8125"
