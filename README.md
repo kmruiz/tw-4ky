@@ -19,5 +19,5 @@ Time between a failure and the subsequent recovery.  (failure = incident, and re
 Change Failure Rate
 -------------------
 
-Ratio between succesfull and failed deployments. (50%, 75%, 25%)
+Ratio between succesfull and failed deployments. (25%, 50%, 75%)
 
