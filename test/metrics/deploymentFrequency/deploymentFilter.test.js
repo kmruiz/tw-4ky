@@ -18,6 +18,8 @@ describe('Deployment Frequency Filter', () => {
         return DeploymentFilter(db)
     }
 
+    const otherRandomDeployment = () => new Deployment(TENANT + Math.random(), ID + Math.random(), +(new Date()))
+
     beforeEach(async () => {
         db = await database.setupDatabase()
     })
@@ -28,7 +30,7 @@ describe('Deployment Frequency Filter', () => {
 
     it('should accept any deployments that have not been processed', async () => {
         const currentDeployment = deploymentFrom(TENANT, ID, WHEN_HAPPENED)
-        const filter = await deploymentFilter({ given: [] })
+        const filter = await deploymentFilter({ given: [ otherRandomDeployment() ] })
 
         const shouldBeProcessed = await filter(currentDeployment)
         expect(shouldBeProcessed).toBeTruthy()
