@@ -6,7 +6,7 @@ class StatsDSink {
     }
 
     deploymentHappened(deployment) {
-        this.client.increment(`fkm.${deployment.tenant}.${deployment.deployable}.deployment`, 1, 1, [ deployment.tenant, deployment.deployable ])
+        this.client.increment(`fkm.deploymentfrequency.${deployment.tenant}.${deployment.deployable}.deployment`, 1, 1, [ deployment.tenant, deployment.deployable ])
     }
 }
 

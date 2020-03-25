@@ -22,6 +22,6 @@ describe('StatsD Sink', () => {
         const deployment = new Deployment(TENANT, DEPLOYABLE, faker.random.uuid(), TIMESTAMP)
         currentSink.deploymentHappened(deployment)
 
-        expect(client.increment).toHaveBeenCalledWith(`fkm.${TENANT}.${DEPLOYABLE}.deployment`, 1, 1, [ TENANT, DEPLOYABLE ])
+        expect(client.increment).toHaveBeenCalledWith(`fkm.deploymentfrequency.${TENANT}.${DEPLOYABLE}.deployment`, 1, 1, [ TENANT, DEPLOYABLE ])
     })
 })
