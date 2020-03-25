@@ -60,7 +60,7 @@
       "pluginVersion": "6.7.1",
       "targets": [
         {
-          "expr": "rate(fkm_myself_deployable_deployment[8h])*60*60*8",
+          "expr": "rate(fkm_myself_deployable_deployment[8h])*60*60*24*7",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -80,7 +80,7 @@
     "list": []
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {
@@ -103,5 +103,5 @@
   "variables": {
     "list": []
   },
-  "version": 7
+  "version": 11
 }
