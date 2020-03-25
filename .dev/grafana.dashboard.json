@@ -21,7 +21,7 @@
     {
       "datasource": null,
       "gridPos": {
-        "h": 9,
+        "h": 8,
         "w": 12,
         "x": 0,
         "y": 0
@@ -31,7 +31,7 @@
         "colorMode": "value",
         "fieldOptions": {
           "calcs": [
-            "changeCount"
+            "lastNotNull"
           ],
           "defaults": {
             "mappings": [],
@@ -60,7 +60,9 @@
       "pluginVersion": "6.7.1",
       "targets": [
         {
-          "expr": "rate(fkm_myself_deployable_deployment[8h])*60*60*24*7",
+          "expr": "rate(fkm_deploymentfrequency_myself_deployable_deployment[8h])*60*60*24*7",
+          "format": "time_series",
+          "instant": false,
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -70,9 +72,63 @@
       "timeShift": null,
       "title": "Deployment Frequency",
       "type": "stat"
+    },
+    {
+      "datasource": null,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 50
+                }
+              ]
+            },
+            "unit": "dthms"
+          },
+          "overrides": [],
+          "values": false
+        },
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto"
+      },
+      "pluginVersion": "6.7.1",
+      "targets": [
+        {
+          "expr": "fkm_leadtimeforchange_myself_deployable_change",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Lead Time For Changes",
+      "type": "stat"
     }
   ],
-  "refresh": "5s",
+  "refresh": "1m",
   "schemaVersion": 22,
   "style": "dark",
   "tags": [],
@@ -103,5 +159,5 @@
   "variables": {
     "list": []
   },
-  "version": 11
+  "version": 5
 }

@@ -23,8 +23,8 @@
   "author": "Kevin Mas Ruiz <kmas@thoughtworks.com>",
   "license": "ISC",
   "dependencies": {
+    "cron": "^1.8.2",
     "knex": "^0.20.13",
-    "node-cron": "^2.0.3",
     "node-fetch": "^2.6.0",
     "node-statsd": "^0.1.1",
     "pg": "^7.18.2",

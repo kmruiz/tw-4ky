@@ -10,7 +10,7 @@ class StatsDSink {
     }
 
     changeDeployed(tenant, deployable, change, duration) {
-        this.client.gauge(`fkm.leadtimeforchange.${tenant}.${deployable}.change`, duration, 1, [ tenant, deployable ])
+        this.client.gauge(`fkm.leadtimeforchange.${tenant}.${deployable}.change`, Math.round(duration / 1000), 1, [ tenant, deployable ])
     }
 }
 

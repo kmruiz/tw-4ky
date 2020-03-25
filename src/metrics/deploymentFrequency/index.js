@@ -18,13 +18,16 @@ const applyMetric = (db, sink) => {
     }
 }
 
-const cron = require('node-cron')
+const CronJob = require('cron').CronJob
 
 module.exports = (source, db, sink) => {
     const deploymentFrequency = applyMetric(db, sink)
 
-    cron.schedule('* * * * *', async () => {
+    const job = new CronJob('*/2 * * * *', async () => {
         const deployments = await source.deployments()
         deployments.forEach(deploymentFrequency)
-    });
+    }, null, true);
+
+    job.start()
+    return job
 }

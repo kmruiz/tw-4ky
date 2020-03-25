@@ -35,6 +35,6 @@ describe('StatsD Sink', () => {
         const change = new Change(COMMIT_ID, TIMESTAMP)
         currentSink.changeDeployed(TENANT, DEPLOYABLE, change, DURATION)
         
-        expect(client.gauge).toHaveBeenCalledWith(`fkm.leadtimeforchange.${TENANT}.${DEPLOYABLE}.change`, DURATION, 1, [ TENANT, DEPLOYABLE ])
+        expect(client.gauge).toHaveBeenCalledWith(`fkm.leadtimeforchange.${TENANT}.${DEPLOYABLE}.change`, Math.round(DURATION / 1000), 1, [ TENANT, DEPLOYABLE ])
     })
 })

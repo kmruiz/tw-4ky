@@ -18,13 +18,16 @@ const applyMetric = (db, sink) => {
     }
 }
 
-const cron = require('node-cron')
+const CronJob = require('cron').CronJob
 
 module.exports = (source, db, sink) => {
     const leadTimeForChanges = applyMetric(db, sink)
 
-    cron.schedule('* * * * *', async () => {
+    const job = new CronJob('*/2 * * * *', async () => {
         const changeSets = await source.changeSets()
         changeSets.forEach(leadTimeForChanges)
-    });
+    }, null, true);
+
+    job.start()
+    return job
 }
