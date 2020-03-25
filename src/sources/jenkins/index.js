@@ -75,10 +75,13 @@ class Jenkins {
             const tenancy = this.tenancy[job.name]
             return job.builds.map(build => {
                 const changeSetDeployed = build.timestamp + build.duration
+                if (build.changeSets == undefined || build.changeSets.length === 0) {
+                    return undefined
+                }
                 const changes = build.changeSets[0].items.map(item => new Change(item.commitId, item.timestamp))
                 return new ChangeSet(tenancy.tenant, tenancy.deployable, changeSetDeployed, changes)
             })
-        })
+        }).filter(e => e !== undefined)
     }
 }
 

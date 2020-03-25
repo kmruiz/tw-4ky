@@ -22,3 +22,4 @@ const source = JenkinsSource({
 const sink = StatsDSink({})
 
 require('./metrics/deploymentFrequency')(source, database, sink)
+require('./metrics/leadTimeForChanges')(source, database, sink)
