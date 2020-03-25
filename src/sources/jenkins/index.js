@@ -67,7 +67,7 @@ class Jenkins {
 
     async changeSets() {
         const jobs = await queryJobsAndChangeSets(this.config.connection)
-        return jobs.map(job => {
+        return jobs.flatMap(job => {
             if (this.tenancy[job.name] === undefined) {
                 return undefined
             }
@@ -78,7 +78,7 @@ class Jenkins {
                 const changes = build.changeSets[0].items.map(item => new Change(item.commitId, item.timestamp))
                 return new ChangeSet(tenancy.tenant, tenancy.deployable, changeSetDeployed, changes)
             })
-        }).flat()
+        })
     }
 }
 
