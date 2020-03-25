@@ -1,5 +1,7 @@
 const fetch = require('node-fetch')
 const Deployment = require('../../metrics/deploymentFrequency/model/deployment')
+const ChangeSet = require('../../metrics/leadTimeForChanges/model/changeSet')
+const Change = require('../../metrics/leadTimeForChanges/model/change')
 
 const queryAllJobs = async (connection) => {
     const response = await fetch(`${connection.url}/api/json?tree=jobs[name]{0,50}`, {
@@ -23,6 +25,18 @@ const queryBuilds = async (connection, job) => {
 
     const body = await response.json()
     return body.builds
+}
+
+const queryJobsAndChangeSets = async (connection) => {
+    const response = await fetch(`${connection.url}/api/json?tree=jobs[name,builds[number,timestamp,result,duration,changeSets[items[commitId,timestamp]]]]{0,50}`, {
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': connection.authorization
+        }
+    })
+
+    const body = await response.json()
+    return body.jobs
 }
 
 class Jenkins {
@@ -49,6 +63,22 @@ class Jenkins {
         }))
 
         return allBuilds.flat()
+    }
+
+    async changeSets() {
+        const jobs = await queryJobsAndChangeSets(this.config.connection)
+        return jobs.map(job => {
+            if (this.tenancy[job.name] === undefined) {
+                return undefined
+            }
+
+            const tenancy = this.tenancy[job.name]
+            return job.builds.map(build => {
+                const changeSetDeployed = build.timestamp + build.duration
+                const changes = build.changeSets[0].items.map(item => new Change(item.commitId, item.timestamp))
+                return new ChangeSet(tenancy.tenant, tenancy.deployable, changeSetDeployed, changes)
+            })
+        }).flat()
     }
 }
 
