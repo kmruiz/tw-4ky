@@ -1,6 +1,6 @@
 module.exports = class {
-    constructor(commitId, timestamp) {
+    constructor(commitId, happened) {
         this.commitId = commitId
-        this.timestamp = timestamp
+        this.happened = happened
     }
 }

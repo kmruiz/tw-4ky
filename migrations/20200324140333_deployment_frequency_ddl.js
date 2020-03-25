@@ -5,10 +5,10 @@ exports.up = async function(knex) {
         table.string('external_id')
         table.datetime('happened').notNullable();
 
-        table.primary([ 'tenant', 'external_id', 'deployable' ]);
+        table.primary([ 'tenant', 'external_id', 'deployable' ])
     });
 };
 
 exports.down = async function(knex) {
-    await knex.schema.dropTable('fkm_df_deployments');
+    await knex.schema.dropTable('fkm_df_deployments')
 };
