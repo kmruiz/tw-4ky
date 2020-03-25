@@ -4,6 +4,8 @@
   "description": "4 key metrics analyzer and exporter",
   "main": "src/index.js",
   "scripts": {
+    "start": "node src/index.js",
+    "start:scratch": "npm run migration:rollback && npm run migration:apply && npm start",
     "test": "jest test/",
     "test:watch": "jest --watchAll test/",
     "migration:new": "knex migrate:make",
@@ -26,6 +28,7 @@
     "node-fetch": "^2.6.0",
     "node-statsd": "^0.1.1",
     "pg": "^7.18.2",
+    "winston": "^3.2.1",
     "yaml": "^1.8.3"
   },
   "devDependencies": {

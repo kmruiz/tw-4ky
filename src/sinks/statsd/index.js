@@ -5,8 +5,8 @@ class StatsDSink {
         this.client = client ||  new StatsD(config);
     }
 
-    deploymentHappened(tenant, deployable) {
-        this.client.increment('fkm_deployment', 1, 1, [ tenant, deployable ])
+    deploymentHappened(deployment) {
+        this.client.increment(`fkm.${deployment.tenant}.${deployment.deployable}.deployment`, 1, 1, [ deployment.tenant, deployment.deployable ])
     }
 }
 

@@ -1,3 +1,6 @@
+const logger = require('../../infrastructure/logger')
+
 module.exports = exporter => deployment => {
-    exporter.deploymentHappened(deployment.tenant, deployment.deployable)
+    logger.info('deploymentHappened', deployment)
+    exporter.deploymentHappened(deployment)
 }

@@ -22,6 +22,6 @@ describe('Deployment Frequency Emitter', () => {
         const currentEmitter = emitter()
         currentEmitter(deployment)
 
-        expect(sink.deploymentHappened).toHaveBeenCalledWith(TENANT, DEPLOYABLE)
+        expect(sink.deploymentHappened).toHaveBeenCalledWith(deployment)
     })
 })

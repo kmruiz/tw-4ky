@@ -1,9 +1,11 @@
 const faker = require('faker')
+const Deployment = require('../../../src/metrics/deploymentFrequency/model/deployment')
 const StatsDSink = require('../../../src/sinks/statsd')
 
 describe('StatsD Sink', () => {
     const TENANT = faker.random.uuid()
     const DEPLOYABLE = faker.random.uuid()
+    const TIMESTAMP = +(new Date())
 
     const client = {
         increment: jest.fn()
@@ -17,8 +19,9 @@ describe('StatsD Sink', () => {
 
     it('should emit a deployment', () => {
         const currentSink = sink()
-        currentSink.deploymentHappened(TENANT, DEPLOYABLE)
+        const deployment = new Deployment(TENANT, DEPLOYABLE, faker.random.uuid(), TIMESTAMP)
+        currentSink.deploymentHappened(deployment)
 
-        expect(client.increment).toHaveBeenCalledWith('fkm_deployment', 1, 1, [ TENANT, DEPLOYABLE ])
+        expect(client.increment).toHaveBeenCalledWith(`fkm.${TENANT}.${DEPLOYABLE}.deployment`, 1, 1, [ TENANT, DEPLOYABLE ])
     })
 })
