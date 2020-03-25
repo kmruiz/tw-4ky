@@ -33,10 +33,19 @@ describe('Lead Time For Changes Filter', () => {
     })
 
     it('should filter out any changes already processed', async () => {
-        const currentChangeset = new ChangeSet(TENANT, DEPLOYABLE, WHEN_CHANGESET_DEPLOYED, [ changeFrom(COMMIT_ID, WHEN_CHANGE_HAPPENED)])
-        const filter = await changeFilter({ given: [ otherRandomChange() ]})
+        const expectedChangeset = new ChangeSet(TENANT, DEPLOYABLE, WHEN_CHANGESET_DEPLOYED, [ 
+            changeFrom(COMMIT_ID, WHEN_CHANGE_HAPPENED)
+        ])
+
+        const randomChange = otherRandomChange()
+        const currentChangeset = new ChangeSet(TENANT, DEPLOYABLE, WHEN_CHANGESET_DEPLOYED, [ 
+            changeFrom(COMMIT_ID, WHEN_CHANGE_HAPPENED),
+            changeFrom(randomChange.commitId, randomChange.happened)
+        ])
+
+        const filter = await changeFilter({ given: [ randomChange ]})
 
         const shouldBeProcessed = await filter(currentChangeset)
-        expect(shouldBeProcessed).toEqual(currentChangeset)
+        expect(shouldBeProcessed).toEqual(expectedChangeset)
     })
 })
