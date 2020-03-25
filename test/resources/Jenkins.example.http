@@ -1,14 +1,14 @@
 ###
-GET http://localhost:8080/job/test-pipeline/14/api/json?tree=changeSets[*[*]]
+GET http://localhost:8080/job/test-pipeline/15/api/json?tree=changeSets[*[*]]
 Accept: application/json
 Authorization: Basic YWRtaW46MDQwOWFkNDk4MTcwNGEzZWEyMzc1MWY5NTZkZWRlOTA=
 
 ###
-GET http://localhost:8080/job/test-pipeline/api/json?tree=builds[number,timestamp,result,duration,url]{0,50}
+GET http://localhost:8080/job/test-pipeline/api/json?tree=builds[number,timestamp,result,duration,url,changeSets[*[*]]]{0,50}
 Accept: application/json
 Authorization: Basic YWRtaW46MDQwOWFkNDk4MTcwNGEzZWEyMzc1MWY5NTZkZWRlOTA=
 
 ### 
-GET http://localhost:8080/api/json?tree=jobs[name]{0,50}
+GET http://localhost:8080/api/json?tree=jobs[name,builds[number,timestamp,result,duration,changeSets[items[commitId,timestamp]]]]{0,50}
 Accept: application/json
 Authorization: Basic YWRtaW46MDQwOWFkNDk4MTcwNGEzZWEyMzc1MWY5NTZkZWRlOTA=
