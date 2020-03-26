@@ -11,5 +11,5 @@ exports.up = async function(knex) {
 };
 
 exports.down = async function(knex) {
-    await knex.schema.dropTable('fkm_ldfc_commits');
+    await knex.schema.dropTable('fkm_cfr_builds');
 };
