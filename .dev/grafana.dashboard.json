@@ -60,7 +60,7 @@
       "pluginVersion": "6.7.1",
       "targets": [
         {
-          "expr": "rate(fkm_deploymentfrequency_myself_deployable_deployment[8h])*60*60*24*7",
+          "expr": "rate(fkm_deploymentfrequency_myself_deployable_deployment[24h])*60*24*7",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -136,7 +136,7 @@
     "list": []
   },
   "time": {
-    "from": "now-7d",
+    "from": "now-2d",
     "to": "now"
   },
   "timepicker": {
@@ -159,5 +159,5 @@
   "variables": {
     "list": []
   },
-  "version": 5
+  "version": 6
 }
